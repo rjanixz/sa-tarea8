@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   mysql:
         image: mysql:8.0
@@ -7,10 +7,12 @@ services:
         working_dir: /application
         volumes:
           - .:/application
+          - ./sql/employees.sql:/docker-entrypoint-initdb.d/employees.sql
+          - ./sql/load_employees.dump:/docker-entrypoint-initdb.d/load_employees.dump
         restart: always
         environment:
           - MYSQL_ROOT_PASSWORD=.sweetpwd.
-          - MYSQL_DATABASE=my_db
+          - MYSQL_DATABASE=employees
           - MYSQL_USER=db_user
           - MYSQL_PASSWORD=.mypwd
         ports:

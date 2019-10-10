@@ -8,30 +8,33 @@
 </head>
 <body style="background-color:green; color:white;">
     <h1>Software Avanzado</h1>
-    <h2>Tarea 8 - Rainman Sián</h2>
+    <h2>Tarea 8 - Rainman Sián | 200815284</h2>
 
+    <b>Listado de Empleados:</b><br>
+    <ul>
     <?php
 
 
-    $conn = new mysqli("database", "root", ".sweetpwd.", "my_db");
+    $conn = new mysqli("database", "root", ".sweetpwd.", "employees");
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT name FROM users";
+    $sql = "SELECT first_name, last_name FROM employees";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         // output data of each row
         while ($row = $result->fetch_assoc()) {
-            echo $row['name']."<br>";
+            echo "<li>".$row['first_name']." ".$row['last_name']."</li>";
         }
     } else {
         echo "0 results";
     }
     $conn->close();
     ?>
+    </ul>
 
 </body>
 </html>
